@@ -8,8 +8,11 @@ var feeds = require('yamljs').load(__dirname + '/feeds.yml');
 var nunjucks = require('nunjucks');
 
 var MAX_SIMULTANEOUS_REQUESTS = 10;
+var MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
+var MAX_ARTICLE_AGE = MS_PER_WEEK * 6;
 
 function parseFeed(name, url, cb) {
+  var earliestPublication = Date.now() - MAX_ARTICLE_AGE;
   var result = {
     name: name,
     error: null,
@@ -21,7 +24,10 @@ function parseFeed(name, url, cb) {
     .pipe(new FeedParser())
     .on('error', function(error) { result.error = error; })
     .on('meta', function(meta) { meta.title = name; result.meta = meta; })
-    .on('data', function(article) { result.articles.push(article); })
+    .on('data', function(article) {
+      if (article.pubdate.getTime() > earliestPublication)
+        result.articles.push(article);
+    })
     .on('end', function() { cb(null, result); });
 }
 
