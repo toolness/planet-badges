@@ -20,7 +20,7 @@ function parseFeed(name, url, cb) {
   request(url)
     .pipe(new FeedParser())
     .on('error', function(error) { result.error = error; })
-    .on('meta', function(meta) { result.meta = meta; })
+    .on('meta', function(meta) { meta.title = name; result.meta = meta; })
     .on('data', function(article) { result.articles.push(article); })
     .on('end', function() { cb(null, result); });
 }
