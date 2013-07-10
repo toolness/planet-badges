@@ -33,3 +33,7 @@ h5.article-source a {
 .article-content blockquote p {
   font-size: 100%;
 }
+
+.article-content {
+  overflow: hidden;
+}
