@@ -2,8 +2,10 @@ This is a simple planet-style feed aggregator that fetches feeds via
 [node-feedparser][] and generates a static site using [nunjucks][].
 
 The process of feed aggregation, static site generation and
-deployment to S3 was meant to be easy to run on Heroku as a single worker
-dyno that runs at regular intervals via [Heroku Scheduler][].
+deployment to S3 was designed to be easy to run on Heroku as a single worker
+dyno that executes at regular intervals via [Heroku Scheduler][]. However,
+it can just as easily be configured as a `cron` job, or run through other
+means.
 
 ## Building The Site
 
