@@ -1,0 +1,20 @@
+{
+  "name": "planet-badges",
+  "version": "0.0.1",
+  "description": "Simple feed aggregator for Openbadges-related news sources.",
+  "dependencies": {
+    "async": "~0.2.9",
+    "feedparser": "~0.16.1",
+    "nunjucks": "~0.1.9",
+    "request": "~2.22.0",
+    "underscore": "~1.5.1",
+    "yamljs": "~0.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Atul Varma <varmaa@gmail.com>",
+  "license": "BSD"
+}
