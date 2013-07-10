@@ -1,0 +1,35 @@
+h1.title {
+  padding-left: 1.2em;
+  background: url(badge-logo.png);
+  background-size: 1em 1em;
+  background-repeat: no-repeat;
+  background-position: 0px 2px;
+}
+
+iframe, embed {
+  max-width: 100%;
+}
+
+.article-title:first-child {
+  border-top: none;
+}
+
+.article-title {
+  border-top: 1px dotted gray;
+  padding-top: 8px;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  font-size: 100%;
+}
+
+h5.article-source a {
+  color: inherit;
+}
+
+.article-content blockquote p {
+  font-size: 100%;
+}

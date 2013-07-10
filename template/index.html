@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="styles.css">
+<title>Planet Badges</title>
+<div class="container-fluid">
+<h1 class="title">Planet Badges</h1>
+<div class="row-fluid">
+  <div class="span10">
+  {% for article in articles %}
+    <h4 class="article-title"><a href="{{ article.link }}">{{ article.title }}</a></h4>
+    <h5 class="article-source"><a href="{{ article.meta.link }}">{{ article.meta.title }}</a></h5>
+    <p><em>{{ article.pubdate }}</em></p>
+    <div class="article-content">
+      {{ article.description|safe }}
+    </div>
+  {% endfor %}
+  </div>
+  <div class="span2">
+    <ul class="nav nav-list">
+      <li class="nav-header">Feeds</li>
+      {% for feed in feeds %}
+      <li><a href="{{ feed.meta.link }}"
+        {% if feed.error %}
+        class="text-error"
+        title="{{ feed.error }}"
+        {% endif %}
+        >{{ feed.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+</div>
