@@ -45,6 +45,7 @@ async.parallelLimit(_.map(feeds, function(url, name) {
 
   render({
     articles: allArticles,
-    feeds: results
+    feeds: results,
+    pubdate: new Date()
   });
 });
