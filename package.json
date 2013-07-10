@@ -8,6 +8,7 @@
     "nunjucks": "~0.1.9",
     "request": "~2.22.0",
     "underscore": "~1.5.1",
+    "knox": "~0.8.3",
     "yamljs": "~0.1.4"
   },
   "devDependencies": {},
