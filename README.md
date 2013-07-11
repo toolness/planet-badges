@@ -22,6 +22,12 @@ You can upload the site to S3 by setting the `S3_KEY`, `S3_SECRET`, and
 
 Just add an entry to `feeds.yml`. The feed can be Atom or RSS.
 
+## Security
+
+Currently, the code doesn't sanitize the HTML coming from the feeds, so either
+host the static site on its own domain or make sure you're only pulling
+content from trusted sources. Or, fork the code and add sanitization!
+
   [node-feedparser]: https://github.com/danmactough/node-feedparser#readme
   [nunjucks]: http://nunjucks.jlongster.com/
   [Heroku Scheduler]: https://devcenter.heroku.com/articles/scheduler
