@@ -37,8 +37,10 @@ function render(context) {
     autoescape: true
   });
   var html = env.getTemplate('index.html').render(context);
+  var rss = env.getTemplate('rss.xml').render(context);
 
   fs.writeFileSync(__dirname + '/static/index.html', html);
+  fs.writeFileSync(__dirname + '/static/rss', rss);
 }
 
 async.parallelLimit(_.map(feeds, function(url, name) {
