@@ -32,6 +32,13 @@ function parseFeed(name, url, cb) {
     .on('end', function() { cb(null, result); });
 }
 
+function cdataEscape(text) {
+  // wrap the passed text in a CDATA block and escape any html
+  text = escape(text);
+  text = '<![CDATA[' + text + ']]>';
+  return text;
+}
+
 function renderRSS(context) {
   // create the feed
   var feed = new RSS();
@@ -47,7 +54,7 @@ function renderRSS(context) {
     feed.item({
       title:          article.title,
       url:           article.link,
-      description:    article.description,
+      description:    escape(article.description),
       date: article.pubdate
     });
   });
