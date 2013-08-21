@@ -5,6 +5,7 @@ var FeedParser = require('feedparser');
 var request = require('request');
 var async = require('async');
 var feeds = require('yamljs').load(__dirname + '/feeds.yml');
+var RSS = require('juan-rss');
 var nunjucks = require('nunjucks');
 
 var MAX_SIMULTANEOUS_REQUESTS = 10;
@@ -31,16 +32,40 @@ function parseFeed(name, url, cb) {
     .on('end', function() { cb(null, result); });
 }
 
+function renderRSS(context) {
+  // create the feed
+  var feed = new RSS();
+  feed.title = 'Planet Badges';
+  feed.description = 'A feed aggregator for Open Badges blogs';
+  feed.feed_url = 'http://planet.openbadges.org/rss';
+  feed.site_url = 'http://planet.openbadges.org';
+  feed.image_url = 'http://planet.openbadges.org/badge-logo.png';
+  feed.author = 'The Open Badges Community';
+
+  // add the items
+  _.each(context.articles, function(article) {
+    feed.item({
+      title:          article.title,
+      url:           article.link,
+      description:    article.description,
+      date: article.pubdate
+    });
+  });
+
+  // write it out
+  rss = feed.xml();
+  fs.writeFileSync(__dirname + '/static/rss', rss);
+}
+
 function render(context) {
+  renderRSS(context);
   var fsLoader = new nunjucks.FileSystemLoader(__dirname + '/template');
   var env = new nunjucks.Environment(fsLoader, {
     autoescape: true
   });
   var html = env.getTemplate('index.html').render(context);
-  var rss = env.getTemplate('rss.xml').render(context);
 
   fs.writeFileSync(__dirname + '/static/index.html', html);
-  fs.writeFileSync(__dirname + '/static/rss', rss);
 }
 
 async.parallelLimit(_.map(feeds, function(url, name) {
