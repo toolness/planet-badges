@@ -1,3 +1,0 @@
-{% for article in articles %}
-{{ article.description|safe }}
-{% endfor %}
