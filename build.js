@@ -12,6 +12,8 @@ var MAX_SIMULTANEOUS_REQUESTS = 10;
 var MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
 var MAX_ARTICLE_AGE = MS_PER_WEEK * 6;
 
+var ORIGIN = process.env['ORIGIN'];
+
 function parseFeed(name, url, cb) {
   var earliestPublication = Date.now() - MAX_ARTICLE_AGE;
   var result = {
@@ -58,6 +60,7 @@ function renderRSS(context) {
 }
 
 function render(context) {
+  context.origin = ORIGIN;
   renderRSS(context);
   var fsLoader = new nunjucks.FileSystemLoader(__dirname + '/template');
   var env = new nunjucks.Environment(fsLoader, {
