@@ -9,7 +9,11 @@ means.
 
 ## Building The Site
 
-Just run `node build.js`, which will fetch feeds and create the
+Set the environment variable `ORIGIN` to the base url that the site is
+served from. Example, `export ORIGIN='http://planet.openbadges.org'`.
+Note, should include the protocol, and not end in a trailing slash.
+
+Run `node build.js`, which will fetch feeds and create the
 planet site in the `static` directory.
 
 ## Uploading The Site To S3
