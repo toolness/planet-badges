@@ -1,3 +1,4 @@
 node_modules
 static/index.html
+static/rss
 config.env
