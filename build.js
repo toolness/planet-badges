@@ -39,9 +39,9 @@ function renderRSS(context) {
   var feed = new RSS();
   feed.title = 'Planet Badges';
   feed.description = 'A feed aggregator for Open Badges blogs';
-  feed.feed_url = 'http://planet.openbadges.org/rss';
-  feed.site_url = 'http://planet.openbadges.org';
-  feed.image_url = 'http://planet.openbadges.org/badge-logo.png';
+  feed.feed_url = ORIGIN + '/rss';
+  feed.site_url = ORIGIN;
+  feed.image_url = ORIGIN + '/badge-logo.png';
   feed.author = 'The Open Badges Community';
 
   // add the items
