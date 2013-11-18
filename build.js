@@ -52,17 +52,15 @@ function renderRSS(context) {
 
   // add the items
   _.each(context.articles, function(article) {
-    try {
-      var util = require('util');
-      feed.item({
-        title:          article.title,
-        url:           article.link,
-        date: article.pubdate
-      });
-      if (article.author) {
-        feed['dc:creator'] = article.author;
-      };
-    } catch (e) { console.log('got an error on ' + article) };
+    feed.item({
+      title:          article.title,
+      url:           article.link,
+      description: article.summary,
+      date: article.pubdate
+    });
+    if (article.author) {
+      feed['dc:creator'] = article.author;
+    };
   });
 
   // write it out
