@@ -14,6 +14,11 @@ var MAX_ARTICLE_AGE = MS_PER_WEEK * 6;
 
 var ORIGIN = process.env['ORIGIN'];
 
+if (!ORIGIN) {
+  throw("Need to set ORIGIN in env to run build");
+  process.exit(1);
+}
+
 function parseFeed(name, url, cb) {
   var earliestPublication = Date.now() - MAX_ARTICLE_AGE;
   var result = {
@@ -37,6 +42,7 @@ function parseFeed(name, url, cb) {
 function renderRSS(context) {
   // create the feed
   var feed = new RSS();
+
   feed.title = 'Planet Badges';
   feed.description = 'A feed aggregator for Open Badges blogs';
   feed.feed_url = ORIGIN + '/rss';
@@ -47,11 +53,14 @@ function renderRSS(context) {
   // add the items
   _.each(context.articles, function(article) {
     feed.item({
-      title:          article.title,
-      url:           article.link,
-      description:    escape(article.description),
+      title: article.title,
+      url: article.link,
+      description: article.summary,
       date: article.pubdate
     });
+    if (article.author) {
+      feed['dc:creator'] = article.author;
+    };
   });
 
   // write it out
