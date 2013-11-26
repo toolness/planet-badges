@@ -53,8 +53,8 @@ function renderRSS(context) {
   // add the items
   _.each(context.articles, function(article) {
     feed.item({
-      title:          article.title,
-      url:           article.link,
+      title: article.title,
+      url: article.link,
       description: article.summary,
       date: article.pubdate
     });
