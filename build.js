@@ -4,6 +4,8 @@ var _ = require('underscore');
 var FeedParser = require('feedparser');
 var request = require('request');
 var async = require('async');
+var YAML = require('yamljs');
+var meta = YAML.load(__dirname + '/meta.yml');
 var RSS = require('juan-rss');
 var nunjucks = require('nunjucks');
 
@@ -43,12 +45,12 @@ function renderRSS(context) {
   // create the feed
   var feed = new RSS();
 
-  feed.title = 'Planet Badges';
-  feed.description = 'A feed aggregator for Open Badges blogs';
-  feed.feed_url = ORIGIN + '/rss';
+  feed.title = meta.title;
+  feed.description = meta.description;
+  feed.feed_url = ORIGIN + meta.feed_url;
   feed.site_url = ORIGIN;
-  feed.image_url = ORIGIN + '/badge-logo.png';
-  feed.author = 'The Open Badges Community';
+  feed.image_url = ORIGIN + meta.image_url;
+  feed.author = meta.author;
 
   // add the items
   _.each(context.articles, function(article) {
@@ -65,11 +67,11 @@ function renderRSS(context) {
 
   // write it out
   rss = feed.xml();
-  fs.writeFileSync(__dirname + '/static/rss', rss);
+  fs.writeFileSync(__dirname + '/static' + meta.feed_url, rss);
 }
 
 function render(context) {
-  context.origin = ORIGIN;
+  _.extend(context, meta);
   renderRSS(context);
   var fsLoader = new nunjucks.FileSystemLoader(__dirname + '/template');
   var env = new nunjucks.Environment(fsLoader, {
@@ -111,4 +113,4 @@ if (SPREADSHEET_URL)
     }
   })
 else
-  fetchFeeds(require('yamljs').load(__dirname + '/feeds.yml'));
+  fetchFeeds(YAML.load(__dirname + '/feeds.yml'));

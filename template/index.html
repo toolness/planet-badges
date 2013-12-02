@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="{{ description }}">
+<meta name="author" content="{{ author }}">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{{origin}}/rss" />
-<title>Planet Badges</title>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ feed_url }}">
+<link rel="icon" href="{{ image_url }}">
+<title>{{ title }}</title>
 <div class="container-fluid">
-<h1 class="title">Planet Badges</h1>
+<h1 class="title">{{ title }}</h1>
 <div class="row-fluid">
   <div class="span10">
   {% for article in articles %}
