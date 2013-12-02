@@ -1,0 +1,7 @@
+{
+  "title": "Planet Badges",
+  "description": "A feed aggregator for Open Badges blogs",
+  "image_url": "/badge-logo.png",
+  "feed_url": "/rss",
+  "author": "The Open Badges Community"
+}

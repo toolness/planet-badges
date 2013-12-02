@@ -4,8 +4,7 @@ var _ = require('underscore');
 var FeedParser = require('feedparser');
 var request = require('request');
 var async = require('async');
-var YAML = require('yamljs');
-var meta = YAML.load(__dirname + '/meta.yml');
+var meta = require('./meta.json');
 var RSS = require('juan-rss');
 var nunjucks = require('nunjucks');
 
@@ -113,4 +112,4 @@ if (SPREADSHEET_URL)
     }
   })
 else
-  fetchFeeds(YAML.load(__dirname + '/feeds.yml'));
+  fetchFeeds(require('./feeds.json'));

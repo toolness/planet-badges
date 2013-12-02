@@ -24,14 +24,14 @@ You can upload the site to S3 by setting the `S3_KEY`, `S3_SECRET`, and
 
 ## Managing Feeds
 
-Feeds can be Atom or RSS. You can manage the list of feeds using a YML
+Feeds can be Atom or RSS. You can manage the list of feeds using a JSON
 file in the repository, or via a Google Spreadsheet. Both options are
 mutually exclusive: if the `SPREADSHEET_URL` environment variable is
-non-empty, then the Google Spreadsheet will be preferred over YML.
+non-empty, then the Google Spreadsheet will be preferred over JSON.
 
-### Using YML
+### Using JSON
 
-Just edit `feeds.yml`, adding or removing entries as necessary.
+Just edit `feeds.json`, adding or removing entries as necessary.
 
 ### Using Google Spreadsheets
 
