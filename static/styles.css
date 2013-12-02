@@ -1,9 +1,8 @@
-h1.title {
-  padding-left: 1.2em;
-  background: url(badge-logo.png);
-  background-size: 1em 1em;
-  background-repeat: no-repeat;
-  background-position: 0px 2px;
+h1.title img {
+  width: 1em;
+  height: 1em;
+  vertical-align: -14%;
+  padding-right: 0.2em;
 }
 
 .article-title:first-child {
