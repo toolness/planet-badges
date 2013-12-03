@@ -5,7 +5,7 @@
   "dependencies": {
     "async": "~0.2.9",
     "feedparser": "~0.16.1",
-    "nunjucks": "~0.1.9",
+    "mustache": "0.7.3",
     "request": "~2.22.0",
     "underscore": "~1.5.1",
     "knox": "~0.8.3",

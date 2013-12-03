@@ -13,26 +13,26 @@
 <h1 class="title"><img src="{{ image_url}}">{{ title }}</h1>
 <div class="row-fluid">
   <div class="span10">
-  {% for article in articles %}
-    <h4 class="article-title"><a href="{{ article.link }}">{{ article.title }}</a></h4>
-    <h5 class="article-source"><a href="{{ article.meta.link }}">{{ article.meta.title }}</a></h5>
-    <p><em>{{ article.pubdate }}</em></p>
+  {{ #articles }}
+    <h4 class="article-title"><a href="{{ link }}">{{ title }}</a></h4>
+    <h5 class="article-source"><a href="{{ meta.link }}">{{ meta.title }}</a></h5>
+    <p><em>{{ pubdate }}</em></p>
     <div class="article-content">
-      {{ article.description|safe }}
+      {{{ description }}}
     </div>
-  {% endfor %}
+  {{ /articles }}
   </div>
   <div class="span2">
     <ul class="nav nav-list">
       <li class="nav-header">Feeds</li>
-      {% for feed in feeds %}
-      <li><a href="{{ feed.meta.link }}"
-        {% if feed.error %}
+      {{ #feeds }}
+      <li><a href="{{ meta.link }}"
+        {{ #error }}
         class="text-error"
-        title="{{ feed.error }}"
-        {% endif %}
-        >{{ feed.name }}</a></li>
-      {% endfor %}
+        title="{{ . }}"
+        {{ /error }}
+        >{{ name }}</a></li>
+      {{ /feeds }}
     </ul>
   </div>
 </div>

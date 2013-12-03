@@ -6,7 +6,7 @@ var request = require('request');
 var async = require('async');
 var meta = require('./meta.json');
 var RSS = require('juan-rss');
-var nunjucks = require('nunjucks');
+var Mustache = require('mustache');
 
 var MAX_SIMULTANEOUS_REQUESTS = 10;
 var MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
@@ -72,11 +72,8 @@ function renderRSS(context) {
 function render(context) {
   _.extend(context, meta);
   renderRSS(context);
-  var fsLoader = new nunjucks.FileSystemLoader(__dirname + '/template');
-  var env = new nunjucks.Environment(fsLoader, {
-    autoescape: true
-  });
-  var html = env.getTemplate('index.html').render(context);
+  var template = fs.readFileSync(__dirname + '/template/index.html', 'utf-8');
+  var html = Mustache.render(template, context);
 
   fs.writeFileSync(__dirname + '/static/index.html', html);
 }
