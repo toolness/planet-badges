@@ -91,18 +91,29 @@ function render(context) {
 
 function fetchFeeds(feeds) {
   async.parallelLimit(_.map(feeds, function(url, name) {
-    return parseFeed.bind(null, name, feeds[name]);
+    return function(cb) {
+      console.log('Fetching "' + name + '"...');
+      parseFeed(name, feeds[name], function(err, result) {
+        console.log('Processed "' + name + '".');
+        cb(err, result);
+      });
+    }
+//    return parseFeed.bind(null, name, feeds[name]);
   }), MAX_SIMULTANEOUS_REQUESTS, function(err, results) {
     if (err) throw err;
 
     var allArticles = _.flatten(_.pluck(results, 'articles'), true);
     allArticles = _.sortBy(allArticles, 'pubdate').reverse();
 
+    console.log('Rendering...');
+
     render({
       articles: allArticles,
       feeds: results,
       pubdate: new Date()
     });
+
+    console.log('Done.');
   });
 }
 
