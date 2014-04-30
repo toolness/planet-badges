@@ -117,7 +117,8 @@ function fetchFeeds(feeds) {
   });
 }
 
-if (SPREADSHEET_URL)
+if (SPREADSHEET_URL) {
+  console.log('Fetching spreadsheet "' + SPREADSHEET_URL + '"...');
   require('tabletop').init({
     key: SPREADSHEET_URL,
     simpleSheet: true,
@@ -130,5 +131,5 @@ if (SPREADSHEET_URL)
       fetchFeeds(feeds);
     }
   })
-else
+} else
   fetchFeeds(require('./feeds.json'));
