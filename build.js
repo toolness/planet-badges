@@ -98,7 +98,6 @@ function fetchFeeds(feeds) {
         cb(err, result);
       });
     }
-//    return parseFeed.bind(null, name, feeds[name]);
   }), MAX_SIMULTANEOUS_REQUESTS, function(err, results) {
     if (err) throw err;
 
