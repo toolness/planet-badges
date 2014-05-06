@@ -11,6 +11,7 @@ var Mustache = require('mustache');
 var MAX_SIMULTANEOUS_REQUESTS = 10;
 var MS_PER_WEEK = 1000 * 60 * 60 * 24 * 7;
 var MAX_ARTICLE_AGE = MS_PER_WEEK * 6;
+var TIMEOUT = 20000;
 
 var ORIGIN = process.env['ORIGIN'];
 var SPREADSHEET_URL = process.env['SPREADSHEET_URL'];
@@ -29,9 +30,19 @@ function parseFeed(name, url, cb) {
     articles: []
   };
 
-  request(url)
+  request(url, {timeout: TIMEOUT})
+    .on('error', function(error) {
+      result.error = error;
+      // FeedParser is automatically killed w/o emitting any additional
+      // events, so we'll call the callback now.
+      cb(null, result);
+    })
     .pipe(new FeedParser())
-    .on('error', function(error) { result.error = error; })
+    .on('error', function(error) {
+      result.error = error;
+      // FeedParser will still emit the 'end' event, so don't call the
+      // callback yet.
+    })
     .on('meta', function(meta) { meta.title = name; result.meta = meta; })
     .on('data', function(article) {
       if (article.pubdate.getTime() > earliestPublication)
