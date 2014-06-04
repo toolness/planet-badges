@@ -45,6 +45,7 @@ function parseFeed(name, url, cb) {
     })
     .on('meta', function(meta) { meta.title = name; result.meta = meta; })
     .on('data', function(article) {
+      article.ourNameForTheAuthor = name;
       if (article.pubdate.getTime() > earliestPublication)
         result.articles.push(article);
     })
@@ -65,7 +66,7 @@ function renderRSS(context) {
   // add the items
   _.each(context.articles, function(article) {
     feed.item({
-      title: article.title,
+      title: article.ourNameForTheAuthor + ': ' + article.title,
       url: article.link,
       description: article.summary,
       date: article.pubdate
