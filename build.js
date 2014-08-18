@@ -52,13 +52,13 @@ function parseFeed(name, url, cb) {
     .on('end', function() { cb(null, result); });
 }
 
-function renderRSS(context) {
+function renderRSS(context, summarized) {
   // create the feed
   var feed = new RSS();
 
   feed.title = meta.title;
   feed.description = meta.description;
-  feed.feed_url = ORIGIN + meta.feed_url;
+  feed.feed_url = summarized ? (ORIGIN + meta.feed_url) : (ORIGIN + meta.feed_full_url);
   feed.site_url = ORIGIN;
   feed.image_url = ORIGIN + meta.image_url;
   feed.author = meta.author;
@@ -68,7 +68,7 @@ function renderRSS(context) {
     feed.item({
       title: article.ourNameForTheAuthor + ': ' + article.title,
       url: article.link,
-      description: article.summary,
+      description: summarized ? article.summary: article.description,
       date: article.pubdate
     });
     if (article.author) {
@@ -78,12 +78,17 @@ function renderRSS(context) {
 
   // write it out
   rss = feed.xml();
-  fs.writeFileSync(__dirname + '/static' + meta.feed_url, rss);
+  if ( summarized ) {
+    fs.writeFileSync(__dirname + '/static' + meta.feed_url, rss);
+  } else {
+    fs.writeFileSync(__dirname + '/static' + meta.feed_full_url, rss);
+  }
 }
 
 function render(context) {
   _.extend(context, meta);
-  renderRSS(context);
+  renderRSS(context, true); // render summarized RSS feeds
+  renderRSS(context, false); // render full description RSS feeds
   var template = fs.readFileSync(__dirname + '/template/index.html', 'utf-8');
   var html = Mustache.render(template, context);
 

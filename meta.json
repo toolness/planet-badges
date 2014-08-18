@@ -3,5 +3,6 @@
   "description": "A feed aggregator for Open Badges blogs",
   "image_url": "/badge-logo.png",
   "feed_url": "/rss",
+  "feed_full_url": "/rss-full",
   "author": "The Open Badges Community"
 }
