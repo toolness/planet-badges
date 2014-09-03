@@ -68,7 +68,8 @@ function renderRSS(context) {
     feed.item({
       title: article.ourNameForTheAuthor + ': ' + article.title,
       url: article.link,
-      description: article.summary,
+      summary: article.summary,
+      description: article.description,
       date: article.pubdate
     });
     if (article.author) {
