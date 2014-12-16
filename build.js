@@ -5,7 +5,7 @@ var FeedParser = require('feedparser');
 var request = require('request');
 var async = require('async');
 var meta = require('./meta.json');
-var RSS = require('juan-rss');
+var RSS = require('rss');
 var Mustache = require('mustache');
 
 var MAX_SIMULTANEOUS_REQUESTS = 10;
