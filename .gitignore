@@ -2,3 +2,5 @@ node_modules
 static/index.html
 static/rss
 config.env
+static/planet.appcache
+static/offline/index.html
