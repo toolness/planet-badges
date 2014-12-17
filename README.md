@@ -1,5 +1,5 @@
 This is a simple planet-style feed aggregator that fetches feeds via
-[node-feedparser][] and generates a static site using [nunjucks][].
+[node-feedparser][] and generates a static site using [mustache][].
 
 The process of feed aggregation, static site generation and
 deployment to S3 was designed to be easy to run on Heroku as a single worker
@@ -50,5 +50,5 @@ host the static site on its own domain or make sure you're only pulling
 content from trusted sources. Or, fork the code and add sanitization!
 
   [node-feedparser]: https://github.com/danmactough/node-feedparser#readme
-  [nunjucks]: http://nunjucks.jlongster.com/
+  [mustache]: http://mustache.github.io/
   [Heroku Scheduler]: https://devcenter.heroku.com/articles/scheduler
