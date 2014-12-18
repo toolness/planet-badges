@@ -3,5 +3,6 @@
   "description": "A feed aggregator for Open Badges blogs",
   "image_url": "/badge-logo.png",
   "feed_url": "/rss",
+  "instructions_url": "https://etherpad.mozilla.org/planet-badges-instructions",
   "author": "The Open Badges Community"
 }

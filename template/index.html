@@ -39,6 +39,9 @@
 </div>
 <footer class="hidden-phone">
   <div class="container-fluid">
-    This page was created by <a href="https://github.com/toolness/planet-badges">planet-badges</a> on {{ pubdate }}.
+    <p>This page was created by <a href="https://github.com/toolness/planet-badges">planet-badges</a> on {{ pubdate }}.</p>
+    {{#instructions_url}}
+    <p>For information on how to add your blog to this page, check out our <a href="{{{ . }}}">instructions</a>.</p>
+    {{/instructions_url}}
   </div>
 </footer>
